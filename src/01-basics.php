@@ -12,6 +12,20 @@
  */
 function getMinuteQuarter(int $minute)
 {
+
+    if($minute < 0 || $minute > 60){
+        throw new InvalidArgumentException("$minute is negative of greater then 60");
+    }
+
+    if($minute > 0 && $minute <= 15){
+        return 'first';
+    }elseif($minute > 15 && $minute <= 30){
+        return 'second';
+    }elseif($minute > 30 && $minute <= 45){
+        return 'third';
+    }elseif($minute > 45 && $minute < 60 || $minute == 0){
+        return 'fourth';
+    }
 }
 
 /**
@@ -27,6 +41,16 @@ function getMinuteQuarter(int $minute)
  */
 function isLeapYear(int $year)
 {
+    if($year < 1900){
+        throw new InvalidArgumentException("$year is lower then 1900");
+    }
+
+    $res = date("L", mktime(0,0,0, 7,7, $year));
+    if($res){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 /**
@@ -42,4 +66,26 @@ function isLeapYear(int $year)
  */
 function isSumEqual(string $input)
 {
+    $num = (int)strlen((string) $input);
+    if($num !== 6){
+        throw new InvalidArgumentException("$num contains more then 6 digits.");
+    }
+
+    $numbers = array_map('intval', str_split($input));
+    $count = count($numbers);
+    $half = $count/2;
+
+    $first = array_slice($numbers, 0, $half);
+    $first_num = array_sum($first);
+
+    $second = array_slice($numbers, $half);
+    $second_num = array_sum($second);
+
+
+    if($first_num == $second_num){
+        return true;
+    }else{
+        return false;
+    }
+
 }
