@@ -9,6 +9,29 @@
  */
 function snakeCaseToCamelCase(string $input)
 {
+    $chars = str_split($input);
+    $arrNum = [];
+    $newStr = [];
+    foreach($chars as $key => $word){
+        if($word == '_'){
+            $key = $key + 1;
+            $arrNum[] = $key;
+        }
+    }
+
+    foreach($chars as $key => $word){
+        $check = in_array($key, $arrNum);
+        if($check){
+            $newStr[] = mb_strtoupper($word);
+        }else{
+            $newStr[] = $word;
+        }
+    }
+
+    $implode = implode('', $newStr);
+    $doneStr = str_replace('_', '', $implode);
+
+    return $doneStr;
 }
 
 /**
@@ -21,6 +44,17 @@ function snakeCaseToCamelCase(string $input)
  */
 function mirrorMultibyteString(string $input)
 {
+    $words = explode(' ', $input);
+    $allWordsDone = [];
+    foreach($words as $word){
+        $arrWord = preg_split('//u', $word, null, PREG_SPLIT_NO_EMPTY);
+        $reverseArr = array_reverse($arrWord);
+        $wordRes = implode('', $reverseArr);
+        $allWordsDone[] = $wordRes;
+    }
+
+    $result = implode(' ', $allWordsDone);
+    return $result;
 }
 
 /**
@@ -39,4 +73,17 @@ function mirrorMultibyteString(string $input)
  */
 function getBrandName(string $noun)
 {
+    $firstWord = $noun[0];
+    $lastWord = substr($noun, -1);
+    if($firstWord == $lastWord){
+        $first = ucfirst($noun);
+        $second = substr($noun, 1);
+        $res = "{$first}{$second}";
+        return $res;
+    }
+
+    $first = 'The ';
+    $second = ucfirst($noun);
+    $res = "{$first}{$second}";
+    return $res;
 }
