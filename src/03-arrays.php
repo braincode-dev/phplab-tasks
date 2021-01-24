@@ -10,6 +10,13 @@
  */
 function repeatArrayValues(array $input)
 {
+    $arr = [];
+    foreach($input as $item){
+        for($i = 1; $i <= $item; $i++){
+            $arr[] = $item;
+        }
+    }
+    return $arr;
 }
 
 /**
@@ -22,6 +29,19 @@ function repeatArrayValues(array $input)
  */
 function getUniqueValue(array $input)
 {
+    if(!is_array($input) || empty($input)){
+        return 0;
+    }
+
+    $count = array_count_values($input);
+    $uniqueNum = array_keys($count, 1);
+
+    if(!empty($uniqueNum)){
+        $minNum = min($uniqueNum);
+        return (int)$minNum;
+    }else{
+        return 0;
+    }
 }
 
 /**
@@ -50,4 +70,31 @@ function getUniqueValue(array $input)
  */
 function groupByTag(array $input)
 {
+    $arrTags = [];
+    foreach($input as $arrs){
+        foreach($arrs['tags'] as $tag){
+            if (!in_array($tag, $arrTags)) {
+                $arrTags[] = $tag;
+            }
+        }
+    }
+
+    sort($arrTags);
+
+    $arrTags = array_flip($arrTags);
+    foreach($arrTags as $key => $tag){
+        $list = [];
+        foreach($input as $arrays){
+            foreach($arrays['tags'] as $item){
+
+                if($item == $key){
+                    $list[] = $arrays['name'];
+                }
+            }
+        }
+        $arrTags[$key] = $list;
+        sort($arrTags[$key]);
+    }
+
+    return $arrTags;
 }
