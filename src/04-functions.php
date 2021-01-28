@@ -36,7 +36,7 @@ function sayHelloArgument($arg)
 function sayHelloArgumentWrapper($arg)
 {
     // put your code here
-    if( !is_int($arg) && !is_string($arg) && !is_bool($arg)){
+    if( !is_int($arg) || !is_string($arg) || !is_bool($arg)){
         throw new InvalidArgumentException("$arg is not: number, string or bool");
     }
 
