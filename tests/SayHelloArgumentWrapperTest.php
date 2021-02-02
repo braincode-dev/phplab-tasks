@@ -15,6 +15,12 @@ class SayHelloArgumentWrapperTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        sayHelloArgumentWrapper(1.2, null, [1,2,3,4,5,6,7]);
+        sayHelloArgumentWrapper(
+            [
+                [1.2],
+                true,
+                ['Hello word']
+            ]
+        );
     }
 }
