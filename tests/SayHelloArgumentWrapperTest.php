@@ -10,17 +10,19 @@ use PHPUnit\Framework\TestCase;
 
 class SayHelloArgumentWrapperTest extends TestCase
 {
-
-    public function testNegative()
+    /**
+     * @dataProvider negativeDataProvider
+     */
+    public function testNegative($input)
     {
         $this->expectException(InvalidArgumentException::class);
+        sayHelloArgumentWrapper($input);
+    }
 
-        sayHelloArgumentWrapper(
-            [
-                [1.2],
-                true,
-                ['Hello word']
-            ]
-        );
+    public function negativeDataProvider(){
+        return [
+            [['Hello'], ['word']],
+            [[23], [2]]
+        ];
     }
 }
