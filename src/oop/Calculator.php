@@ -128,7 +128,7 @@ class Calculator
     {
         // TODO implement undo logic here
         $intents = $this->intents;
-        unset($intents[count($intents)-1]);
+        unset($intents[count($intents) - 1]);
         $this->intents = $intents;
 
         return $this;
@@ -146,10 +146,6 @@ class Calculator
         $lastIntent = $intents[array_key_last($intents)];
         array_push($intents, $lastIntent);
         $this->intents = $intents;
-//        echo "<pre>";
-//        var_dump($intents);
-//        echo "</pre>";
-//        die();
 
         return $this;
     }

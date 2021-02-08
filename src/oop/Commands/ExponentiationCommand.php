@@ -20,6 +20,6 @@ class ExponentiationCommand implements CommandInterface
             throw new \InvalidArgumentException('Not enough parameters');
         }
 
-        return pow($args[0],  $args[1]);
+        return pow($args[0], $args[1]);
     }
 }

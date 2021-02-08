@@ -17,8 +17,8 @@ $calc->addCommand('^', new ExponentiationCommand());
 
 // You can use any operation for computing
 // will output 2
-echo $calc->init(1) // 1
-    ->compute('+', 4)
+echo $calc->init(1)// 1
+->compute('+', 4)
     ->getResult();
 
 echo PHP_EOL;
